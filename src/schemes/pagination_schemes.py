@@ -8,4 +8,4 @@ class PaginationParams(BaseModel):
     limit: int = 10
 
     class Config:
-        schema_extra = {"example": {"cursor": 100, "limit": 10}}
+        json_schema_extra = {"example": {"cursor": 100, "limit": 10}}

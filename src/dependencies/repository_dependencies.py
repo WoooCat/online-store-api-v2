@@ -3,6 +3,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.infrastructure.db.database import get_db
 from src.repositories.implementation.category_repository import CategoryRepository
+from src.repositories.implementation.discount_repository import DiscountRepository
+from src.repositories.implementation.product_repository import ProductRepository
 
 
 def get_category_repository(db: AsyncSession = Depends(get_db)) -> CategoryRepository:
@@ -13,3 +15,24 @@ def get_category_repository(db: AsyncSession = Depends(get_db)) -> CategoryRepos
     :return: An instance of CategoryRepository.
     """
     return CategoryRepository(db)
+
+
+def get_product_repository(db: AsyncSession = Depends(get_db)) -> ProductRepository:
+    """
+    Returns a ProductRepository instance, injecting the database session dependency.
+
+    :param db: AsyncSession, the current database session.
+    :return: An instance of ProductRepository.
+    """
+    return ProductRepository(db)
+
+
+def get_discount_repository(db: AsyncSession = Depends(get_db)) -> DiscountRepository:
+    """
+    Returns a DiscountRepository instance, injecting the database session dependency.
+
+    :param db: AsyncSession, the current database session.
+    :return: An instance of DiscountRepository.
+    """
+    return DiscountRepository(db)
+

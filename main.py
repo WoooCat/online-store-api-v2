@@ -1,7 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.api.v1.routers import category_router, product_router, discount_router, reservation_router, sale_router, report_router
+from src.api.v1.routers import (
+    category_router,
+    product_router,
+    discount_router,
+    reservation_router,
+    sale_router,
+    report_router,
+)
 from src.infrastructure.db.database import engine
 from src.infrastructure.db.models import models
 from src.middleware.exception_handling import ExceptionHandlingMiddleware

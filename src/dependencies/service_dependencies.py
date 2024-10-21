@@ -1,7 +1,13 @@
 from fastapi import Depends
 
-from src.dependencies.repository_dependencies import get_category_repository, get_product_repository, \
-    get_discount_repository, get_reservation_repository, get_sale_repository, get_report_repository
+from src.dependencies.repository_dependencies import (
+    get_category_repository,
+    get_discount_repository,
+    get_product_repository,
+    get_report_repository,
+    get_reservation_repository,
+    get_sale_repository,
+)
 from src.repositories.implementation.category_repository import CategoryRepository
 from src.repositories.implementation.discount_repository import DiscountRepository
 from src.repositories.implementation.product_repository import ProductRepository

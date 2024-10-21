@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from src.api.v1.routers import category_router, product_router, discount_router, reservation_router, sale_router, report_router
 from src.infrastructure.db.database import engine
@@ -22,9 +23,6 @@ app.include_router(sale_router.router)
 app.include_router(report_router.router)
 
 
-app.add_middleware(ExceptionHandlingMiddleware)
-
-
 async def create_db():
     async with engine.begin() as conn:
         await conn.run_sync(models.Base.metadata.create_all)
@@ -46,3 +44,17 @@ async def root_redirect():
     """Redirect to the Swagger UI documentation."""
     return RedirectResponse(url="/docs")
 
+origins = [
+    'http://localhost:8000',
+]
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.add_middleware(ExceptionHandlingMiddleware)

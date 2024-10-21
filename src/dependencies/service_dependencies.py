@@ -1,15 +1,17 @@
 from fastapi import Depends
 
 from src.dependencies.repository_dependencies import get_category_repository, get_product_repository, \
-    get_discount_repository, get_reservation_repository
+    get_discount_repository, get_reservation_repository, get_sale_repository
 from src.repositories.implementation.category_repository import CategoryRepository
 from src.repositories.implementation.discount_repository import DiscountRepository
 from src.repositories.implementation.product_repository import ProductRepository
 from src.repositories.implementation.reservation_repository import ReservationRepository
+from src.repositories.implementation.sale_repository import SaleRepository
 from src.services.category_service import CategoryService
 from src.services.discount_service import DiscountService
 from src.services.product_service import ProductService
 from src.services.reservation_service import ReservationService
+from src.services.sale_service import SaleService
 
 
 def get_category_service(
@@ -65,3 +67,17 @@ def get_reservation_service(
      :return: An instance of ReservationService.
      """
     return ReservationService(reservation_repo, product_repo)
+
+
+def get_sale_service(
+    product_repo: ProductRepository = Depends(get_product_repository),
+    sale_repo: SaleRepository = Depends(get_sale_repository),
+) -> SaleService:
+    """
+    Returns a SaleService instance, injecting the SaleRepository and ProductRepository dependencies.
+
+    :param product_repo: The ProductRepository instance.
+    :param sale_repo: The SaleRepository instance.
+    :return: An instance of SaleService.
+    """
+    return SaleService(sale_repo, product_repo)

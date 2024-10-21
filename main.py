@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from src.api.v1.routers import category_router, product_router, discount_router, reservation_router
+from src.api.v1.routers import category_router, product_router, discount_router, reservation_router, sale_router
 from src.infrastructure.db.database import engine
 from src.infrastructure.db.models import models
 from src.middleware.exception_handling import ExceptionHandlingMiddleware
@@ -18,6 +18,7 @@ app.include_router(category_router.router)
 app.include_router(product_router.router)
 app.include_router(discount_router.router)
 app.include_router(reservation_router.router)
+app.include_router(sale_router.router)
 
 
 app.add_middleware(ExceptionHandlingMiddleware)

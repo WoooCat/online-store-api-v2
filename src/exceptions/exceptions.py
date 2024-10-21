@@ -64,3 +64,11 @@ class NotEnoughStockError(BaseAppException):
         else:
             message = f"Not enough stock for Product ID {product_id}."
         super().__init__(message, status_code=400)
+
+
+class ReservationNotFoundError(BaseAppException):
+    """Exception raised when a requested reservation is not found."""
+
+    def __init__(self, reservation_id: int):
+        message = f"Reservation with ID {reservation_id} not found."
+        super().__init__(message, status_code=404)

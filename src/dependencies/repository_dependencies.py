@@ -5,6 +5,7 @@ from src.infrastructure.db.database import get_db
 from src.repositories.implementation.category_repository import CategoryRepository
 from src.repositories.implementation.discount_repository import DiscountRepository
 from src.repositories.implementation.product_repository import ProductRepository
+from src.repositories.implementation.reservation_repository import ReservationRepository
 
 
 def get_category_repository(db: AsyncSession = Depends(get_db)) -> CategoryRepository:
@@ -35,4 +36,16 @@ def get_discount_repository(db: AsyncSession = Depends(get_db)) -> DiscountRepos
     :return: An instance of DiscountRepository.
     """
     return DiscountRepository(db)
+
+
+def get_reservation_repository(
+    db: AsyncSession = Depends(get_db),
+) -> ReservationRepository:
+    """
+    Returns a ReservationRepository instance, injecting the database session dependency.
+
+    :param db: AsyncSession, the current database session.
+    :return: An instance of ReservationRepository.
+    """
+    return ReservationRepository(db)
 

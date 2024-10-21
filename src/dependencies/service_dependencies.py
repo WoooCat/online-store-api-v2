@@ -1,15 +1,17 @@
 from fastapi import Depends
 
 from src.dependencies.repository_dependencies import get_category_repository, get_product_repository, \
-    get_discount_repository, get_reservation_repository, get_sale_repository
+    get_discount_repository, get_reservation_repository, get_sale_repository, get_report_repository
 from src.repositories.implementation.category_repository import CategoryRepository
 from src.repositories.implementation.discount_repository import DiscountRepository
 from src.repositories.implementation.product_repository import ProductRepository
+from src.repositories.implementation.report_repository import ReportRepository
 from src.repositories.implementation.reservation_repository import ReservationRepository
 from src.repositories.implementation.sale_repository import SaleRepository
 from src.services.category_service import CategoryService
 from src.services.discount_service import DiscountService
 from src.services.product_service import ProductService
+from src.services.report_service import ReportService
 from src.services.reservation_service import ReservationService
 from src.services.sale_service import SaleService
 
@@ -81,3 +83,15 @@ def get_sale_service(
     :return: An instance of SaleService.
     """
     return SaleService(sale_repo, product_repo)
+
+
+def get_report_service(
+    report_repo: ReportRepository = Depends(get_report_repository)
+) -> ReportService:
+    """
+    Returns a ReportService instance, injecting the ReportRepository dependency.
+
+    :param report_repo: The ReportRepository instance.
+    :return: An instance of ReportService.
+    """
+    return ReportService(report_repo)
